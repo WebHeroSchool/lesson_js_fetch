@@ -9,6 +9,7 @@ function checkUsername(url) {
   return name;
 }
 console.log(checkUsername(url));
+
 fetch(`https://api.github.com/users/${checkUsername(url)}`)
 	.then(res => res.json())
 	.then(json => {
