@@ -17,17 +17,19 @@ fetch(`https://api.github.com/users/${checkUsername(url)}`)
 		console.log(json.name);
 		console.log(json.bio);
     console.log(json.html_url);
+    let html_url = "https://github.com/" + json.login;
     let img = new Image();
     img.src = json.avatar_url;
     body.append(img);
-    let name = document.createElement('p');
+    let name = document.createElement('a');
+    name.setAttribute("href", html_url);
     if(json.name !=null) {
       name.innerHTML = json.name;
     } else {
       name.innerHTML = 'Информация об имени недоступна';
     }
     body.append(name);
-    name.addEventListener("click", () => location.assign('https://github.com/${checkUsername(url)}'));
+    name.addEventListener("click", () => location.assign(`https://api.github.com/users/${checkUsername(url)}`));
     let bio = document.createElement('p');
     if (json.bio !=null) {
       bio.innerHTML = json.bio;
