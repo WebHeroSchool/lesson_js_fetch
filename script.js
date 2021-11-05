@@ -27,6 +27,7 @@ Promise.all([getInformation, getTime])
   console.log(time);
   return res.json()
 })
+
 .then(json => {
   preloaderEl.classList.add('hidden');
   console.log(json.avatar_url);
@@ -44,9 +45,9 @@ Promise.all([getInformation, getTime])
   } else {
     name.innerHTML = 'Информация об имени пользователе недоступна';
   }
-
   body.append(name);
   name.addEventListener("click", () => location.assign(`https://github.com/${checkUsername(url)}`));
+  
   let bio = document.createElement('p');
   if (json.bio != null) {
     bio.innerHTML = json.bio;
@@ -54,5 +55,10 @@ Promise.all([getInformation, getTime])
     bio.innerHTML = 'Информация о bio пользователя недоступна';
   }
   body.append(bio);
+
+  let times = document.createElement('h3');
+  times.innerHTML = Date();
+  body.append(times);
 })
+
 .catch(err => alert('Информация о пользователе недоступна'));
